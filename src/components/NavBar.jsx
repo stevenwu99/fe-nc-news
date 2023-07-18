@@ -7,9 +7,8 @@ const NavBar = (props) => {
        <ul >
           <li><Link to="/">Home</Link></li>
           <li><Link to="/articles">Articles</Link></li>
-          <li><Link to="articles/article_id" onClick={(props) => {props.setArticleById("")}}>Individual Article</Link></li>
-         	</ul>
-          <hr />
+      </ul>
+      <hr/>
       </nav>
   );
 };
