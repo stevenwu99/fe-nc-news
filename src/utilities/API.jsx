@@ -10,8 +10,6 @@ export const getData = (searchUrl) => {
     }
 
 
-
-
 export const linkStyle = {
         margin: "1rem",
         textDecoration: "none",
