@@ -2,7 +2,7 @@ import { useState,useEffect} from "react";
 import {getData} from "../utilities/API";
 import ArticleCard from "./ArticleCard";
 
-const  ShowArticles = ({categoryFilter}) => {
+const  ShowArticles = () => {
     const [articles,setArticles] = useState([]);
     const [isLoading,setIsLoading] = useState(true)
     let  searchUrl = "/articles";
