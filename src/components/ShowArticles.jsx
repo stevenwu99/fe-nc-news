@@ -1,15 +1,11 @@
 import { useState,useEffect} from "react";
-import {getData,showLoading} from "../utilities/API";
+import {getData} from "../utilities/API";
 import ArticleCard from "./ArticleCard";
 
 const  ShowArticles = ({categoryFilter}) => {
-    
     const [articles,setArticles] = useState([]);
     const [isLoading,setIsLoading] = useState(true)
-   
     let  searchUrl = "/articles";
-   
-    
     useEffect (() =>{
         getData(searchUrl)      
         .then (({articles}) => {
@@ -17,10 +13,10 @@ const  ShowArticles = ({categoryFilter}) => {
             setArticles(articles)       
         })
    },[]);
- 
-
-showLoading(isLoading)
-
+   
+if (isLoading) {
+    return (<p>Loading.........</p>)
+}
 
     return (
         <div>

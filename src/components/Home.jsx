@@ -1,12 +1,7 @@
 const Home = () => {
     return (
-        <div>
-           <section>
-                <p>Welcome to NC News............</p>
-            </section>
-        </div>
-    )
-
+          <p>Welcome to NC News............</p>
+        )
 }
 
 export default Home;

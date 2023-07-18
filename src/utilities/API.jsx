@@ -9,8 +9,3 @@ export const getData = (searchUrl) => {
          })
     }
 
-export const showLoading = (isLoading) => {
-    if (isLoading) {
-        return <p>Loading.........</p>
-    }
-}
