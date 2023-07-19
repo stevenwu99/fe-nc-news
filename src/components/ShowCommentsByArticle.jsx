@@ -1,38 +1,36 @@
+import { useState,useEffect } from "react";
+import { getData } from "../utilities/API";
+import CommentCard from "./CommentCard";
 
-import {useState,useEffect} from "react";
-import { useParams } from "react-router-dom";
-import {getData} from "../utilities/API"
-import ArticleDetail from "./ArticleDetail";
+const ShowCommentsByArticle = ({article_id}) =>{
+    //const [article_id] = useOutletContext();
 
-const ShowArticlesById = () => {
-
-    const [article,setArticle] = useState({});
+    const [comments,setComments] = useState([]);
     const [isLoading,setIsLoading] = useState(true)
     const [errMsg,setErrMsg] = useState("")
-    const {article_id} = useParams();
- 
+
     let  searchUrl = "";
 
-     if ( article_id!== "") {
+     if ( article_id !== "") {
         const articleIdNum = Number(article_id)
-        searchUrl = `/articles/${articleIdNum}`;
+        searchUrl = `/articles/${articleIdNum}/comments`;
     } 
 
-     useEffect (() =>{
+       useEffect (() =>{
        if (searchUrl !== "") {
            getData(searchUrl)
-           .then (({article}) => {
+           .then (({comments}) => {
                setIsLoading(false)
-               setArticle(article)    
+               setComments(comments)    
                setErrMsg("");   
           })
           .catch((error) => {
-               setArticle([]);
+            setComments([]);
                setErrMsg(error.response.data.msg);
                setIsLoading(false)
              })
         } else {
-            setArticle([]);
+            setComments([]);
             setErrMsg("");  
         }
    },[article_id]);
@@ -44,14 +42,12 @@ if  (searchUrl !== "") {
     }
 }
 
-
     return (
         <div>
-            {errMsg ? <p>{errMsg}</p>:<ArticleDetail article = {article}/> }
+            {errMsg ? <p>{errMsg}</p>:<CommentCard comments = {comments}/> }
         </div>
-    
     )
-
 }
 
-export default ShowArticlesById;
+export default ShowCommentsByArticle
+
