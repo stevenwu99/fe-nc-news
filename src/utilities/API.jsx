@@ -8,8 +8,13 @@ export const getData = (searchUrl) => {
             return data;
          })
     }
-
-
+    
+export const patchData = (patchUrl,patchData) => {
+        return db.patch(patchUrl,patchData)
+         .then(({data}) => {
+                return data;
+         })
+};
 
 
 export const linkStyle = {
