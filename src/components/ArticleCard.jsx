@@ -12,7 +12,7 @@ const articleCard = ({articles}) => {
                            <header name="Title">Title: {article.title}</header>
                            <header name="Author">Author: {article.author}</header>
                            <header name="Topic">Topic: {article.topic}</header>
-                           <header name ="Created Date">Created_at: {article.created_at.substring(0,10)}</header>
+                           <header name ="Created Date">Created Date: {article.created_at.substring(0,10)}</header>
                         </Link>
                         <hr/>
                       </div>
