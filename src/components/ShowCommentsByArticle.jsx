@@ -3,8 +3,7 @@ import { getData } from "../utilities/API";
 import CommentCard from "./CommentCard";
 
 const ShowCommentsByArticle = ({article_id}) =>{
-    //const [article_id] = useOutletContext();
-
+   
     const [comments,setComments] = useState([]);
     const [isLoading,setIsLoading] = useState(true)
     const [errMsg,setErrMsg] = useState("")
