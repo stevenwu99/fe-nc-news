@@ -11,9 +11,9 @@ const CommentCard = ({comments,setComments,article_id,showNewCommentForm}) => {
                  return  ( 
                        <div key = {comment.comment_id}>
                            <header name="Author">Author: {comment.author}</header>
-                           <header name="Body">Body: {comment.body}</header>
+                           <header name="Body">{comment.body}</header>
                            <header name="Votes">Votes: {comment.votes}</header>
-                           <header name ="Created Date">Created Date: {comment.created_at}</header>
+                           <header name ="Created Date">{comment.created_at}</header>
                         <hr/>
                       </div>
                  )

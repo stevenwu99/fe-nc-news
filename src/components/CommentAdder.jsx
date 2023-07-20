@@ -26,9 +26,7 @@ const CommentAdder = ({setComments,article_id}) =>{
 
         const dataPost =  {username:user,body:newComment.trim()}
 
-        console.log("New Comment--->",dataPost)
-
-        postData(postUrl,dataPost)
+         postData(postUrl,dataPost)
          .then(({comment}) => {
                  comment.created_at = comment.created_at.substring(0,10)
                  setComments((currentComment) => {
