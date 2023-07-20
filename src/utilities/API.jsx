@@ -16,6 +16,12 @@ export const patchData = (patchUrl,patchData) => {
          })
 };
 
+export const postData = (postUrl,dataPost) => {
+        return db.post(postUrl,dataPost)
+         .then(({data}) => {
+                return data;
+         })
+    };
 
 export const linkStyle = {
         margin: "1rem",
@@ -23,3 +29,6 @@ export const linkStyle = {
         color: 'black',
         fontSize: 18
 };
+
+
+    
