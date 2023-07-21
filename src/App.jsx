@@ -8,6 +8,7 @@ import Header from './components/Header';
 import ShowArticles from './components/ShowArticles';
 import ShowArticlesById from './components/ShowArticlesById';
 import ShowTopics from './components/ShowTopics';
+import ErrorPage from './components/ErrorPage';
 
 export const UserContext = createContext(null);
 
@@ -23,6 +24,7 @@ const App = () => {
                  <Route path="/articles"  element = {<><Header title = {"articles"}/> <ShowArticles /></>} />
                  <Route path="/articles/:article_id"  element = {<ShowArticlesById/>} />
                  <Route path="/topics"  element = {<><Header title ={"topics"}/> <ShowTopics /></>} />
+                 <Route path="*" element ={<ErrorPage />} />
               </Routes>
           </div>
         </UserContext.Provider>
