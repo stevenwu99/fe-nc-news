@@ -4,25 +4,41 @@ import {getArticles} from "../utilities/API";
 import ArticleCard from "./ArticleCard";
 
 const  ShowArticles = () => {
-    const [articles,setArticles] = useState([]);
-    const [isLoading,setIsLoading] = useState(true)
-    let requestData ={};
-    let  searchUrl = "/articles";
- 
-    const articlesQuery = {sort_by:"",order:""};
+   let requestData ={};  
+   let  searchUrl = "/articles";
 
-    const [queryValue,setQueryValue] = useState(articlesQuery)
+   const [searchParams,setSearchParams] = useSearchParams();
+   const newParams = new URLSearchParams(searchParams) 
 
-    const [errMsg,setErrMsg] = useState("");
+    let topicQuery = searchParams.get("topic")
+    let sortByValue = searchParams.get("sort_by")
+    let orderValue = searchParams.get("order")
 
-    const [searchParams,setSearchParams] = useSearchParams();
-    const newParams = new URLSearchParams(searchParams)
+   console.log("sortByValue---->",sortByValue)
 
-    const topicQuery = searchParams.get("topic")
-    if (topicQuery) {
+   if (topicQuery) {
+        newParams.set("topic",topicQuery)
         requestData.topic = topicQuery;
-    } 
+   } 
 
+   if (sortByValue === null) {
+       sortByValue = "created_at"
+      newParams.set("sort_by",sortByValue)
+      requestData.sort_by = "created_at"
+   }
+
+   if (orderValue === null) {
+      orderValue = "DESC"
+      newParams.set("order",orderValue)
+      requestData.order = "DESC"
+   }
+
+   const defaultQuery = {sort_by:sortByValue,order:orderValue};
+   const [queryValue,setQueryValue] = useState(defaultQuery)
+  
+   const [articles,setArticles] = useState([]);
+   const [isLoading,setIsLoading] = useState(true)
+   const [errMsg,setErrMsg] = useState("");
 
     const handleChangeSortBy = (e) => {
         setQueryValue({...queryValue,sort_by:e.target.value});
@@ -37,22 +53,12 @@ useEffect (() =>{
     if (queryValue.sort_by !== "") {
         newParams.set("sort_by",queryValue.sort_by)
         requestData.sort_by = queryValue.sort_by
-    } else {
-        setSearchParams((params) => {
-            params.delete('sort_by');
-            return params;
-          });
-    }
+    } 
 
     if (queryValue.order !== "") {
         newParams.set("order",queryValue.order)
         requestData.order = queryValue.order
-    } else { 
-       setSearchParams((params) => {
-        params.delete('order');
-        return params;
-      });  
-    }
+    } 
     
     setSearchParams(newParams) 
 
@@ -81,7 +87,6 @@ if (isLoading) {
                <th><header>Sort By:</header></th>
                <th>
                     <select onChange={handleChangeSortBy} value = {queryValue.sort_by}> 
-                       <option value="" selected disabled> ---Sort by--- </option>
                        <option value="created_at">date</option>
                        <option value="comment_count">comment count</option>
                        <option value="votes">votes</option>
@@ -90,7 +95,6 @@ if (isLoading) {
                <th><header>Order:</header></th>
                <th>
                    <select onChange={handleChangeOrder} value = {queryValue.order}> 
-                      <option value="" selected disabled> ---Order--- </option>
                       <option value="ASC">ASC</option>
                       <option value="DESC">DESC</option>
                    </select>   

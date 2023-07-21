@@ -70,7 +70,7 @@ const ArticleDetail= ({article}) => {
     const handleOnClickViewComments = (e) => {
      
       if (e.target.textContent === 'View Comments') {
-         e.target.textContent = 'Un View';
+         e.target.textContent = 'Hide Comments';
          setArticleId(article.article_id)
       } else {
          e.target.textContent = 'View Comments';
