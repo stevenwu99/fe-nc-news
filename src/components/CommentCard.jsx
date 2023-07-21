@@ -7,14 +7,22 @@ const CommentCard = ({comments,setComments,article_id,showNewCommentForm}) => {
 
     const {user} = useContext(UserContext);
     const [errMsg,setErrMsg] = useState("")
+    const [deleteControl,setDeleteControl] = useState(false);
+    const [isDisplay,setIsDisplay] = useState("")
 
     const handleOnclick = (e) => {
   
        const  commentId = Number(e.target.value);
        const  delUrl = `/comments/${commentId}`;
-
+       
+    
+ 
        const confirmBox = window.confirm("Do you really want to delete this comment?")
          if (confirmBox === true) {
+            setErrMsg("");
+            setDeleteControl(true);
+            setIsDisplay(e.target.value);
+            
             deleteData(delUrl)
             .then((data) => {
                 setComments((current) =>
@@ -25,6 +33,10 @@ const CommentCard = ({comments,setComments,article_id,showNewCommentForm}) => {
              .catch((error) => {            
                  setErrMsg("Something went wrong! Please try again");
              })
+             .finally (() => {
+                  setDeleteControl(false)
+             })
+            
         }
     }
 
@@ -41,8 +53,10 @@ const CommentCard = ({comments,setComments,article_id,showNewCommentForm}) => {
                            <header name="Body">{comment.body}</header>
                            <header name="Votes">Votes: {comment.votes}</header>
                            <header name ="Created Date">{comment.created_at}</header>
-                           <button value= {comment.comment_id} onClick= {handleOnclick} disabled = {comment.author !== user}>Delete</button>
-                            {errMsg ? <p>errMsg</p>:null}
+                           <button value= {comment.comment_id} onClick= {handleOnclick} disabled = {comment.author !== user || deleteControl}>Delete</button>
+                            {isDisplay != comment.comment_id ? null:  (errMsg ? <p>{errMsg}</p>: null) }
+                            {isDisplay != comment.comment_id ? null:  (deleteControl ? <p>Deleting... ...</p>:null) }
+                            
                         <hr/>
                       </div>
                  )
