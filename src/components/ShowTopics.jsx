@@ -1,6 +1,5 @@
 import { useState,useEffect} from "react";
 import {getData} from "../utilities/API";
-import ArticleCard from "./ArticleCard";
 import TopicCard from "./TopicCard";
 
 const  ShowTopics = () => {
