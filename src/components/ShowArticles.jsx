@@ -14,8 +14,6 @@ const  ShowArticles = () => {
     let sortByValue = searchParams.get("sort_by")
     let orderValue = searchParams.get("order")
 
-   console.log("sortByValue---->",sortByValue)
-
    if (topicQuery) {
         newParams.set("topic",topicQuery)
         requestData.topic = topicQuery;

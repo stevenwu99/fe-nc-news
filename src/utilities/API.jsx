@@ -34,6 +34,12 @@ export const postData = (postUrl,dataPost) => {
          })
     };
 
+export const deleteData = (searchUrl) => {
+       return db.delete(searchUrl)
+        .then((data) => {
+            return data;
+         })
+ }
 
 export const linkStyle = {
         margin: "1rem",
